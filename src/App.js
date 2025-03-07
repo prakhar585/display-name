@@ -1,23 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [isVisibsle, setIsVisible] =  useState(false);
+  const handleForm = (e) => {
+    e.preventDefault()
+    setIsVisible(true);
+    
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Full Name Display</h1>
+      <form onSubmit={handleForm}>
+        <label htmlFor="first-name">First Name: </label>
+        <input
+          required
+          id="first-name"
+          name="firstName"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          ></input>
+        <br></br>
+        <label htmlFor="last-name">Last Name: </label>
+        <input
+          required
+          id="last-name"
+          name="lastName"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        ></input>
+        <br></br>
+        <button type="submit">Submit</button>
+      </form>
+
+      {isVisibsle ? <> Full Name: {firstName} {lastName}</>:null}
+
+
     </div>
   );
 }
