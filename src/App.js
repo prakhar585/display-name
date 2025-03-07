@@ -17,6 +17,7 @@ function App() {
         <label htmlFor="first-name">First Name: </label>
         <input
           required
+          type="text"
           id="first-name"
           name="firstName"
           value={firstName}
@@ -26,6 +27,7 @@ function App() {
         <label htmlFor="last-name">Last Name: </label>
         <input
           required
+          type="text"
           id="last-name"
           name="lastName"
           value={lastName}
