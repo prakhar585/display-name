@@ -3,11 +3,14 @@ import React, { useState } from "react";
 function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [isVisibsle, setIsVisible] =  useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  
   const handleForm = (e) => {
-    e.preventDefault()
-    setIsVisible(true);
-    
+    e.preventDefault();
+    // Only show the full name if both fields have values
+    if (firstName && lastName) {
+      setIsVisible(true);
+    }
   };
 
   return (
@@ -16,30 +19,26 @@ function App() {
       <form onSubmit={handleForm}>
         <label htmlFor="first-name">First Name: </label>
         <input
-          required
           type="text"
           id="first-name"
           name="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          ></input>
-        <br></br>
+        />
+        <br />
         <label htmlFor="last-name">Last Name: </label>
         <input
-          required
           type="text"
           id="last-name"
           name="lastName"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-        ></input>
-        <br></br>
+        />
+        <br />
         <button type="submit">Submit</button>
       </form>
 
-      {isVisibsle ? <> Full Name: {firstName} {lastName}</>:null}
-
-
+      {isVisible && <div>Full Name: {firstName} {lastName}</div>}
     </div>
   );
 }
