@@ -3,14 +3,12 @@ import React, { useState } from "react";
 function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
+  const [showFullName, setShowFullName] = useState(false);
   
   const handleForm = (e) => {
     e.preventDefault();
-    // Only show the full name if both fields have values
-    if (firstName && lastName) {
-      setIsVisible(true);
-    }
+    // Only show full name if both fields have values
+    setShowFullName(firstName && lastName);
   };
 
   return (
@@ -19,15 +17,17 @@ function App() {
       <form onSubmit={handleForm}>
         <label htmlFor="first-name">First Name: </label>
         <input
+          required
           type="text"
           id="first-name"
           name="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-        />
+          />
         <br />
         <label htmlFor="last-name">Last Name: </label>
         <input
+          required
           type="text"
           id="last-name"
           name="lastName"
@@ -37,8 +37,8 @@ function App() {
         <br />
         <button type="submit">Submit</button>
       </form>
-
-      {isVisible && <div>Full Name: {firstName} {lastName}</div>}
+      
+      {showFullName && <div>Full Name: {firstName} {lastName}</div>}
     </div>
   );
 }
