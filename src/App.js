@@ -1,46 +1,61 @@
 import React, { useState } from "react";
 
-function App() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [showFullName, setShowFullName] = useState(false);
-  
-  const handleForm = (e) => {
-    e.preventDefault();
-    // Only show full name if both fields have values
-    setShowFullName(firstName && lastName);
-  };
 
+function Fullname() {
+  const [firstName, setFirstName] = useState("");
+  const [secondName, setSecondName] = useState("");
+  const [fullName, setFullName] = useState("");
+
+  //   const handleFirstChange = (e) => {
+  //     setFirstName(e.target.value);
+  //   };
+
+  //   const handleSecondChange = (e) => {
+  //     setSecondName(e.target.value);
+  //   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); //Prevents page refresh
+    if (firstName.trim() && secondName.trim()) {
+      setFullName(`${firstName} ${secondName}`);
+    }
+    // checks if both firstName and
+    // secondName contain non-empty values
+    // after removing extra spaces.
+  };
   return (
-    <div className="App">
+    <div className="fomm_div" onSubmit={handleSubmit}>
       <h1>Full Name Display</h1>
-      <form onSubmit={handleForm}>
-        <label htmlFor="first-name">First Name: </label>
+      <form className="name_form">
+        <label>First Name: </label>
         <input
-          required
           type="text"
-          id="first-name"
-          name="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          />
-        <br />
-        <label htmlFor="last-name">Last Name: </label>
-        <input
           required
+        ></input>
+
+        <label>Last Name: </label>
+        <input
           type="text"
-          id="last-name"
-          name="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <br />
-        <button type="submit">Submit</button>
+          value={secondName}
+          onChange={(e) => setSecondName(e.target.value)}
+          required
+        ></input>
+
+        <button
+          type="submit"
+        //   disabled={!firstName.trim() || !secondName.trim()}
+        >
+          Submit
+        </button>
       </form>
-      
-      {showFullName && <div>Full Name: {firstName} {lastName}</div>}
+      {/* Display full name only if both fields are filled */}
+      {fullName && <p>Full Name: {fullName}</p>}
+      {/* //same as */}
+      {/* {fullName ? <p>Full Name: {fullName}</p> : null} */}
     </div>
   );
 }
 
-export default App;
+export default Fullname;
